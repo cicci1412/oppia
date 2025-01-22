@@ -56,7 +56,11 @@ export class LanguageBannerComponent implements OnInit {
         return;
       }
 
-      if (!(this.languageBannerService.getLanguageBannerCookieNum() === 0)) {
+      if (
+        !(
+          this.languageBannerService.getRemainingLanguageBannerShowcases() === 0
+        )
+      ) {
         // We are only planning to show the "can change language" banner to users whose browser language is not English.
         if (navigator.language.slice(0, 2) !== 'en') {
           this.bannerIsVisible = true;
