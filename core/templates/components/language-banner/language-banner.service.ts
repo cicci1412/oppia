@@ -46,7 +46,7 @@ export class LanguageBannerService {
   markLanguageBannerAsDismissed(): void {
     if (
       this.hasAcceptedCookies() &&
-      !(this.getLanguageBannerCookieNum() === 0)
+      !(this.getRemainingLanguageBannerShowcases() === 0)
     ) {
       this.setNumTimesRemainingToShowLanguageBanner(0);
     }
@@ -59,9 +59,10 @@ export class LanguageBannerService {
     );
   }
 
-  getLanguageBannerCookieNum(): number {
-    return Number(
+  getRemainingLanguageBannerShowcases(): number {
+    let remainingShowcases = Number(
       this.cookieService.get(this.NUM_TIMES_REMAINING_TO_SHOW_LANGUAGE_BANNER)
     );
+    return isNaN(remainingShowcases) ? 5 : remainingShowcases;
   }
 }

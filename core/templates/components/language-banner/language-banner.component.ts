@@ -57,25 +57,19 @@ export class LanguageBannerComponent implements OnInit {
       }
 
       if (!(this.languageBannerService.getLanguageBannerCookieNum() === 0)) {
-        // Here the browser language is checked as we only want to notify users
-        // who’s browser language is not in english, that the site language can be changed.
+        // We are only planning to show the "can change language" banner to users whose browser language is not English.
         if (navigator.language.slice(0, 2) !== 'en') {
           this.bannerIsVisible = true;
 
-          // Every time the banner is loaded this number is decreased by 1 starting at 4.
+          // Every time the banner is loaded, this number is decreased by 1 (starting at 4).
           // This makes sure the banner is shown a maximum of 5 times for the user and
           // then disappears forever.
           let remainingTimesToShowLanguageBanner =
-            this.languageBannerService.getLanguageBannerCookieNum();
-          if (!remainingTimesToShowLanguageBanner) {
-            this.languageBannerService.setNumTimesRemainingToShowLanguageBanner(
-              4
-            );
-          } else {
-            this.languageBannerService.setNumTimesRemainingToShowLanguageBanner(
-              remainingTimesToShowLanguageBanner - 1
-            );
-          }
+            this.languageBannerService.getRemainingLanguageBannerShowcases();
+
+          this.languageBannerService.setNumTimesRemainingToShowLanguageBanner(
+            remainingTimesToShowLanguageBanner - 1
+          );
         }
       }
     });
