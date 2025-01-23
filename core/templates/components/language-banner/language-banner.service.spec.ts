@@ -82,7 +82,9 @@ describe('LanguageBannerService', () => {
 
   it('should reset banner count when removing language banner', () => {
     spyOn(service, 'hasAcceptedCookies').and.returnValue(true);
-    spyOn(service, 'getRemainingLanguageBannerShowcases').and.returnValue(4);
+    spyOn(service, 'getNumRemainingTimesToShowLanguageBanner').and.returnValue(
+      4
+    );
     spyOn(service, 'setNumTimesRemainingToShowLanguageBanner');
 
     service.markLanguageBannerAsDismissed();
@@ -104,7 +106,7 @@ describe('LanguageBannerService', () => {
   it('should return the correct number from the language banner cookie', () => {
     cookieService.get.and.returnValue('3');
 
-    const result = service.getRemainingLanguageBannerShowcases();
+    const result = service.getNumRemainingTimesToShowLanguageBanner();
 
     expect(result).toBe(3);
   });
@@ -112,7 +114,7 @@ describe('LanguageBannerService', () => {
   it('should return 5 if the cookie value is invalid', () => {
     cookieService.get.and.returnValue('invalid');
 
-    const result = service.getRemainingLanguageBannerShowcases();
+    const result = service.getNumRemainingTimesToShowLanguageBanner();
 
     expect(result).toBe(5);
   });

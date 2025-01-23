@@ -57,9 +57,8 @@ export class LanguageBannerComponent implements OnInit {
       }
 
       if (
-        !(
-          this.languageBannerService.getRemainingLanguageBannerShowcases() === 0
-        )
+        this.languageBannerService.getNumRemainingTimesToShowLanguageBanner() >
+        0
       ) {
         // We are only planning to show the "can change language" banner to users whose browser language is not English.
         if (navigator.language.slice(0, 2) !== 'en') {
@@ -69,7 +68,7 @@ export class LanguageBannerComponent implements OnInit {
           // This makes sure the banner is shown a maximum of 5 times for the user and
           // then disappears forever.
           let remainingTimesToShowLanguageBanner =
-            this.languageBannerService.getRemainingLanguageBannerShowcases();
+            this.languageBannerService.getNumRemainingTimesToShowLanguageBanner();
 
           this.languageBannerService.setNumTimesRemainingToShowLanguageBanner(
             remainingTimesToShowLanguageBanner - 1

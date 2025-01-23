@@ -46,7 +46,7 @@ export class LanguageBannerService {
   markLanguageBannerAsDismissed(): void {
     if (
       this.hasAcceptedCookies() &&
-      !(this.getRemainingLanguageBannerShowcases() === 0)
+      !(this.getNumRemainingTimesToShowLanguageBanner() === 0)
     ) {
       this.setNumTimesRemainingToShowLanguageBanner(0);
     }
@@ -59,7 +59,7 @@ export class LanguageBannerService {
     );
   }
 
-  getRemainingLanguageBannerShowcases(): number {
+  getNumRemainingTimesToShowLanguageBanner(): number {
     let remainingShowcases = Number(
       this.cookieService.get(this.NUM_TIMES_REMAINING_TO_SHOW_LANGUAGE_BANNER)
     );
